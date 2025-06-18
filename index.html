@@ -85,14 +85,19 @@
                 result = 'Veuillez entrer un nom ou un prénom.';
             } else {
                 const found = etudiants.filter(e => {
-                    const matchNom = nom ? e.nom.includes(nom) : true;
-                    const matchPrenom = prenom ? e.prenom.includes(prenom) : true;
+                    const matchNom = nom ? e.nom.toLowerCase().includes(nom) : true;
+                    const matchPrenom = prenom ? e.prenom.toLowerCase().includes(prenom) : true;
                     return matchNom && matchPrenom;
                 });
                 if (found.length === 0) {
                     result = 'Aucun étudiant trouvé.';
                 } else {
-                    result = found.map(e => `<b>${e.numero}</b> - ${e.nom.toUpperCase()} ${e.prenom.charAt(0).toUpperCase() + e.prenom.slice(1)}`).join('<br>');
+                    result = found.map(e => `
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+                            <b>${e.numero}</b> - ${e.nom.toUpperCase()} ${e.prenom.charAt(0).toUpperCase() + e.prenom.slice(1)}
+                            <a href="https://note.tozza.net/?num=${encodeURIComponent(e.numero)}" target="_blank" style="background:#3b82f6;color:#fff;padding:7px 14px;border-radius:5px;text-decoration:none;font-size:0.98rem;transition:background 0.2s;">Voir notes</a>
+                        </div>
+                    `).join('');
                 }
             }
             document.getElementById('result').innerHTML = result;
