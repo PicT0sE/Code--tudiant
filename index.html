@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche Numéro Étudiant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Recherche Numéro Étudiant</h1>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" placeholder="Entrez le nom">
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" placeholder="Entrez le prénom">
+        <button id="searchBtn">Rechercher</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        // Les données sont extraites du fichier txt
+        const etudiants = [
+            { numero: '22301157', nom: 'andrieux', prenom: 'hugo' },
+            { numero: '22300505', nom: 'bartecki', prenom: 'benjamin' },
+            { numero: '22302498', nom: 'bartz', prenom: 'alexandre' },
+            { numero: '22301163', nom: 'bonfils countouzoglou', prenom: 'luce' },
+            { numero: '22303003', nom: 'borghi', prenom: 'mathis' },
+            { numero: '22300607', nom: 'bosquain', prenom: 'evan' },
+            { numero: '22301419', nom: 'bouabdallah', prenom: 'yacine' },
+            { numero: '22203201', nom: 'bougouffa', prenom: 'zahia' },
+            { numero: '22300796', nom: 'boyer', prenom: 'seraphin' },
+            { numero: '22302848', nom: 'canal', prenom: 'tom' },
+            { numero: '22302974', nom: 'cano', prenom: 'jean' },
+            { numero: '22300223', nom: 'chaudun', prenom: 'elouan' },
+            { numero: '22303147', nom: 'cherif', prenom: 'yasmine' },
+            { numero: '22201171', nom: 'clément', prenom: 'luka' },
+            { numero: '22303740', nom: 'collomp', prenom: 'elenaic' },
+            { numero: '22302369', nom: 'demonchaux', prenom: 'marceau' },
+            { numero: '22300457', nom: 'deschamps', prenom: 'lucas' },
+            { numero: '22300490', nom: 'edarazi', prenom: 'bouchra' },
+            { numero: '22302261', nom: 'ege', prenom: 'tom' },
+            { numero: '22301346', nom: 'ellafi', prenom: 'meya' },
+            { numero: '22302384', nom: 'fejean', prenom: 'yoann' },
+            { numero: '22302333', nom: 'gandon', prenom: 'matteo' },
+            { numero: '22300429', nom: 'gasperi', prenom: 'lou-anna' },
+            { numero: '22300849', nom: 'giusto', prenom: 'marius' },
+            { numero: '22301051', nom: 'gunanto', prenom: 'ismael' },
+            { numero: '22302011', nom: 'kemimech', prenom: 'bilel' },
+            { numero: '22301968', nom: 'lanyeri', prenom: 'rahnya' },
+            { numero: '22300598', nom: 'martin', prenom: 'theo' },
+            { numero: '22300147', nom: 'mathieu', prenom: 'mathilde' },
+            { numero: '22303459', nom: 'meira ribeiro', prenom: 'luis miguel' },
+            { numero: '22300896', nom: 'mekki', prenom: 'ahmed' },
+            { numero: '22302589', nom: 'moegni', prenom: 'nazar' },
+            { numero: '22303762', nom: 'mokrzycki', prenom: 'raphael' },
+            { numero: '22300277', nom: 'navarre--gomez', prenom: 'adrian' },
+            { numero: '22201977', nom: 'ounnalay', prenom: 'lana' },
+            { numero: '22104398', nom: 'pardossi', prenom: 'ethan' },
+            { numero: '22302027', nom: 'pierre', prenom: 'roan' },
+            { numero: '22302177', nom: 'resse', prenom: 'benjamin' },
+            { numero: '21908461', nom: 'rochard', prenom: 'clara' },
+            { numero: '22304440', nom: 'ronel', prenom: 'ilan' },
+            { numero: '22300926', nom: 'sahmoudi', prenom: 'maissam' },
+            { numero: '22300154', nom: 'siffredi', prenom: 'emma' },
+            { numero: '22301929', nom: 'simon', prenom: 'thomas' },
+            { numero: '22304741', nom: 'sion', prenom: 'killian' },
+            { numero: '22301951', nom: 'strahl', prenom: 'emma' },
+            { numero: '22303910', nom: 'tangour', prenom: 'bilel' },
+            { numero: '22302806', nom: 'todisco', prenom: 'maxime' },
+            { numero: '22300106', nom: 'tomaszewski', prenom: 'romain' },
+            { numero: '22300431', nom: 'tourreau', prenom: 'kevin' },
+            { numero: '22303226', nom: 'tropin', prenom: 'paul' },
+            { numero: '22300724', nom: 'vaquier', prenom: 'mathis' },
+            { numero: '22204628', nom: 'vareille', prenom: 'gabriel' },
+            { numero: '22300319', nom: 'vasseur', prenom: 'raphael' },
+            { numero: '22300553', nom: 'villa', prenom: 'francois-marie' },
+            { numero: '22300339', nom: 'wetterwald', prenom: 'lucas' },
+            { numero: '22300431', nom: 'wood', prenom: 'tom' }
+        ];
+
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const nom = document.getElementById('nom').value.trim().toLowerCase();
+            const prenom = document.getElementById('prenom').value.trim().toLowerCase();
+            let result = '';
+            if (!nom && !prenom) {
+                result = 'Veuillez entrer un nom ou un prénom.';
+            } else {
+                const found = etudiants.filter(e => {
+                    const matchNom = nom ? e.nom.includes(nom) : true;
+                    const matchPrenom = prenom ? e.prenom.includes(prenom) : true;
+                    return matchNom && matchPrenom;
+                });
+                if (found.length === 0) {
+                    result = 'Aucun étudiant trouvé.';
+                } else {
+                    result = found.map(e => `<b>${e.numero}</b> - ${e.nom.toUpperCase()} ${e.prenom.charAt(0).toUpperCase() + e.prenom.slice(1)}`).join('<br>');
+                }
+            }
+            document.getElementById('result').innerHTML = result;
+        });
+    </script>
+</body>
+</html>

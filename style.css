@@ -1,0 +1,119 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    background: #fff;
+    margin-top: 60px;
+    padding: 32px 24px 24px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+}
+h1 {
+    text-align: center;
+    color: #2d3a4b;
+    margin-bottom: 24px;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #3a4a5d;
+    font-weight: 500;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 14px 12px;
+    margin-bottom: 18px;
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background: #f9fafb;
+    transition: border 0.2s;
+}
+input[type="text"]:focus {
+    border: 1.5px solid #3b82f6;
+    outline: none;
+    background: #fff;
+}
+button {
+    width: 100%;
+    padding: 16px;
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-bottom: 8px;
+}
+button:active {
+    transform: scale(0.98);
+}
+button:hover {
+    background: #2563eb;
+}
+.result {
+    margin-top: 20px;
+    padding: 16px;
+    background: #e0f2fe;
+    border-radius: 8px;
+    color: #1e293b;
+    font-size: 1.1rem;
+    min-height: 32px;
+    word-break: break-word;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        margin-top: 10vw;
+        padding: 6vw 3vw 6vw 3vw;
+        max-width: 98vw;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    h1 {
+        font-size: 1.1rem;
+        margin-bottom: 18px;
+    }
+    label {
+        font-size: 0.98rem;
+    }
+    input[type="text"] {
+        font-size: 1rem;
+        padding: 12px 8px;
+        margin-bottom: 14px;
+    }
+    button {
+        font-size: 1rem;
+        padding: 13px;
+    }
+    .result {
+        font-size: 0.98rem;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 2vw 1vw 2vw 1vw;
+    }
+    h1 {
+        font-size: 0.98rem;
+    }
+    .result {
+        font-size: 0.92rem;
+    }
+}
