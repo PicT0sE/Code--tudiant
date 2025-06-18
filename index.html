@@ -13,6 +13,8 @@
         <input type="text" id="nom" placeholder="Entrez le nom">
         <label for="prenom">Prénom :</label>
         <input type="text" id="prenom" placeholder="Entrez le prénom">
+        <label for="numero">Numéro étudiant :</label>
+        <input type="text" id="numero" placeholder="Entrez le numéro étudiant">
         <button id="searchBtn">Rechercher</button>
         <div class="result" id="result"></div>
     </div>
@@ -79,14 +81,16 @@
         document.getElementById('searchBtn').addEventListener('click', function() {
             const nom = document.getElementById('nom').value.trim().toLowerCase();
             const prenom = document.getElementById('prenom').value.trim().toLowerCase();
+            const numero = document.getElementById('numero').value.trim();
             let result = '';
-            if (!nom && !prenom) {
-                result = 'Veuillez entrer un nom ou un prénom.';
+            if (!nom && !prenom && !numero) {
+                result = 'Veuillez entrer un nom, un prénom ou un numéro étudiant.';
             } else {
                 const found = etudiants.filter(e => {
                     const matchNom = nom ? e.nom.toLowerCase().includes(nom) : true;
                     const matchPrenom = prenom ? e.prenom.toLowerCase().includes(prenom) : true;
-                    return matchNom && matchPrenom;
+                    const matchNumero = numero ? e.numero.includes(numero) : true;
+                    return matchNom && matchPrenom && matchNumero;
                 });
                 if (found.length === 0) {
                     result = 'Aucun étudiant trouvé.';
